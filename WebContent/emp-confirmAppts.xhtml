@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/template-emp.xhtml">
+		<ui:define name="title">Confirmar Agendamentos	</ui:define>
+		<ui:define name="content">
+	<h:form>
+		<p:growl id="messages" showDetail="true" />
+		<h:panelGrid style="width: 700px;">
+			<h3 style="margin-top: 0">Confirmar Agendamentos</h3>
+			<p:schedule id="schedule" value="#{confirmAppt.eventModel}"
+				widgetVar="myschedule" timeZone="GMT+2">
+				<p:ajax event="eventSelect" listener="#{confirmAppt.onEventSelect}"
+					oncomplete="PF('eventDialog').show();" />
+
+			</p:schedule>
+		</h:panelGrid>
+	
+
+	<p:dialog widgetVar="eventDialog" header="Confirmar agendamento"
+		 showEffect="clip" hideEffect="clip">
+		 <h:form id="dialog">
+				<h:outputLabel value="Nome:" style="font-weight:bold" />
+				<h:outputLabel value="#{sched.appt.client.name}" style="font-weight:bold" />
+				<br></br>
+				<p:commandButton id="confirm" value="Sim" process="@this"
+					action="#{sched.confirmAppointment}"
+					oncomplete="PF('myschedule').update();PF('eventDialog').hide();">
+				</p:commandButton>
+
+				<p:commandButton value="Cancelar" onclick="PF('eventDialog').hide()"
+					type="button" />
+			</h:form>
+	</p:dialog>
+	</h:form>
+	</ui:define>
+	</ui:composition>
+</h:body>
+</html>

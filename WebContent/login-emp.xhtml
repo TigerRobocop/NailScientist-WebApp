@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>The NailScientist</title>
+	<style type="text/css">
+.value {
+	width: 700px;
+}
+</style>
+</h:head>
+<h:body>
+
+	<p:panel header="Welcome to The NailScientist - Employee sign in" id="panInicio"
+		style="text-align:center; width:500px">
+		<h:form styleClass="input-form" style="text-align: left;">
+			<h:panelGrid columns="2" border="0">
+				<h:outputLabel for="login" value="Login:" />
+				<p:inputText id="login" value="#{loginBeanEmp.username}"
+					required="true" />
+				<h:outputLabel for="pass" value="Senha:" />
+				<p:inputText id="pass" value="#{loginBeanEmp.password}"
+					required="true" />
+
+				<p:commandButton value="Entrar"
+					action="#{loginBeanEmp.doLogin}" />
+				<br></br>
+				
+				
+			</h:panelGrid>
+		</h:form>
+	
+		<p:separator />
+		<br></br>
+
+		<a href="index.xhtml">Início</a>
+	</p:panel>
+
+</h:body>
+</html>
