@@ -20,7 +20,7 @@
 	<p:panel header="Welcome to The NailScientist" id="panInicio"
 		style="text-align:center; width:500px;">
 		<h:form styleClass="input-form" style="text-align: left;  ">
-			<h:panelGrid columns="2" border="0" >
+			<h:panelGrid columns="2" border="0">
 				<h:outputLabel for="login" value="Login:" />
 				<p:inputText id="login" value="#{loginBeanCli.username}"
 					required="true" />
@@ -28,20 +28,51 @@
 				<p:inputText id="pass" value="#{loginBeanCli.password}"
 					required="true" />
 
-				<p:commandButton value="Entrar"
-					action="#{loginBeanCli.doLogin}"  />
+				<p:commandButton value="Entrar" action="#{loginBeanCli.doLogin}" />
 				<br></br>
-				
-				
+
+
 			</h:panelGrid>
 		</h:form>
-		Ou <a href="">crie aqui</a> sua nova conta!
+		Ou <a href="">crie aqui</a> sua nova conta!<br></br>
+		<p:commandLink value="Modal Sign Up!" type="text"
+			onclick="PF('signUpModal').show();" />
 		<br></br>
 		<p:separator />
 		<br></br>
 
 		<a href="login-emp.xhtml">Login employee</a>
 	</p:panel>
+
+	<p:dialog header="Registre-se!" widgetVar="signUpModal" modal="true">
+		<h:form id="signupForm" styleClass="input-form">
+			<h:panelGrid columns="2" border="0">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="name" label="Nome:" value="#{signup.client.name}"
+						required="true" />
+					<p:outputLabel value="Login:" />
+					<p:inputText id="username" label="Login:"
+						value="#{signup.client.login}" required="true" />
+					<p:outputLabel value="Senha:" />
+					<p:password id="password" label="Senha:"
+						value="#{signup.client.password}" feedback="true"
+						required="true" match="password2" />
+					<p:outputLabel value="Digite novamente:" />
+					<p:password id="password2" label="Digite novamente:"
+						value="#{signup.client.password}" feedback="false"
+						required="true" />
+					<p:outputLabel value="Data de nascimento:" />
+					<p:calendar id="birthdate" value="#{signup.client.dob}"
+						navigator="true" required="true" yearRange="c-100:c-0"
+						pattern="dd/MM/yyyy" showOn="button" />
+				</h:panelGrid>
+				<p:commandButton value="Cadastrar" action="#{signup.registerNew}"
+					style="display:block; margin:0 auto;" ajax="false" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
 
 </h:body>
 </html>
