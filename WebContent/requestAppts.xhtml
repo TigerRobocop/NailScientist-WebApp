@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<ui:composition template="/template-cli.xhtml">
+		<ui:define name="title">Solicitar Agendamentos	</ui:define>
+		<ui:define name="content">
+			<p:panel header="Solicitar Agendamentos" id="panInicio"
+				style="text-align:center; width:500px">
+				<h:form styleClass="input-form" style="text-align: left;">
+					<h:panelGrid columns="2" border="0">
+						<p:outputLabel for="empl" value="Selecione o funcionário:" />
+						<p:selectOneMenu id="empl" value="#{appt.emp.id}"
+							style="width:300px" required="true">
+							<f:selectItem itemLabel="Escolha um" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{appt.listEmployee}" var="emp"
+								itemLabel="#{emp.name}" itemValue="#{emp.id}" />
+						</p:selectOneMenu>
+						<p:outputLabel for="datetime" value="Datetime:" />
+						<p:calendar id="datetime" style="width:300px"  value="#{appt.timeAppt}"
+							pattern="dd/MM/yyyy HH:mm:ss" />
+
+						<p:commandButton type="reset" value="Reset" />
+						<p:commandButton id="addButton" value="Save" process="@this"
+							action="#{appt.requestAppointment}"
+							oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+
+						<br></br>
+
+
+					</h:panelGrid>
+				</h:form>
+
+
+
+			</p:panel>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

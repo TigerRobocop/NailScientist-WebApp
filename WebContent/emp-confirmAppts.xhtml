@@ -26,10 +26,10 @@
 		 showEffect="clip" hideEffect="clip">
 		 <h:form id="dialog">
 				<h:outputLabel value="Nome:" style="font-weight:bold" />
-				<h:outputLabel value="#{sched.appt.client.name}" style="font-weight:bold" />
+				<h:outputLabel value="#{confirmAppt.appt.client.name}" style="font-weight:bold" />
 				<br></br>
 				<p:commandButton id="confirm" value="Sim" process="@this"
-					action="#{sched.confirmAppointment}"
+					action="#{confirmAppt.confirmAppointment}"
 					oncomplete="PF('myschedule').update();PF('eventDialog').hide();">
 				</p:commandButton>
 

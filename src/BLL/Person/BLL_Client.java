@@ -17,10 +17,7 @@ public class BLL_Client {
 		DAL_Client dao = DAL_Factory.getDAL_Client();
 		if (e.getName().trim().equals("")) {
 			throw new Exception("Informe o NOME");
-		}
-		if (e.getPhone().trim().length() < 13) {
-			throw new Exception("Informe um TELEFONE valido");
-		}
+		}		
 		if (e.getLogin().trim().equals("")) {
 			throw new Exception("Informe o LOGIN");
 		}

@@ -1,7 +1,6 @@
 package managedBeans;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +22,8 @@ import org.primefaces.model.ScheduleModel;
 import facade.Facade;
 import basicas.service.Appointment;
 
-@ManagedBean(name="confirmAppt")
-//@ViewScoped
+@ManagedBean(name = "confirmAppt")
+@ViewScoped
 public class CalendarBean implements Serializable {
 
 	private static final long serialVersionUID = 1778611320935836740L;
@@ -32,7 +31,7 @@ public class CalendarBean implements Serializable {
 	private ScheduleEvent event = new DefaultScheduleEvent();
 	List<Appointment> listAppts;
 	Appointment appt;
-
+	
 	@PostConstruct
 	public void init() {
 		eventModel = new DefaultScheduleModel();
@@ -42,10 +41,9 @@ public class CalendarBean implements Serializable {
 			for (Appointment sc : listAppts) {
 				eventModel.addEvent(new DefaultScheduleEvent(sc.getClient()
 						.getName(), sc.getStartAppointment(), sc
-						.getEndAppointment()));
+						.getEndAppointment(), sc));
 			}
 		}
-
 
 	}
 
@@ -60,31 +58,25 @@ public class CalendarBean implements Serializable {
 		return retorno;
 	}
 
-	public Date getRandomDate(Date base) {
-		Calendar date = Calendar.getInstance();
-		date.setTime(base);
-		date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1); // set random
-																	// day of
-																	// month
+	public String confirmAppointment() {
+		try {
+			Facade f = new Facade();
+			appt = f.findScheduling(appt.getId());
 
-		return date.getTime();
-	}
+			appt.setConfirmed(true);
 
-	public Date getInitialDate() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY,
-				calendar.get(Calendar.DATE), 0, 0, 0);
+			f.confirmAppointment(appt);
 
-		return calendar.getTime();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "emp-confirmAppts.xhtml";
 	}
 
 	public ScheduleModel getEventModel() {
 		return eventModel;
 	}
 
-
-
-	
 	public ScheduleEvent getEvent() {
 		return event;
 	}
@@ -104,11 +96,13 @@ public class CalendarBean implements Serializable {
 
 	public void onEventSelect(SelectEvent selectEvent) {
 		event = (ScheduleEvent) selectEvent.getObject();
+		appt = (Appointment) event.getData();
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
 		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(),
 				(Date) selectEvent.getObject());
+		
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {

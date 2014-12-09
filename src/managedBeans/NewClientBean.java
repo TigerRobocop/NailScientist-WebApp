@@ -38,7 +38,12 @@ public class NewClientBean implements Serializable {
 			Facade f = new Facade();
 			f.insertCliente(client);
 			
-			return "welcome-cli.xhtml?faces-redirect=true";
+			LoginBeanCli bean = new LoginBeanCli();
+			bean.setUsername(client.getLogin());
+			
+			
+			return bean.doLogin();
+			 //"welcome-cli.xhtml?faces-redirect=true";
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
