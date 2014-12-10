@@ -21,12 +21,14 @@
 							<f:selectItems value="#{appt.listEmployee}" var="emp"
 								itemLabel="#{emp.name}" itemValue="#{emp.id}" />
 						</p:selectOneMenu>
-						<p:outputLabel for="datetime" value="Datetime:" />
-						<p:calendar id="datetime" style="width:300px"  value="#{appt.timeAppt}"
+						<p:outputLabel for="datetime" value="Horário:" />
+						<p:calendar id="datetime" style="width:150px"  value="#{appt.timeAppt}"
 							pattern="dd/MM/yyyy HH:mm:ss" />
+							<p:outputLabel for="desc" value="Descrição de serviço: "></p:outputLabel>
+							<p:inputText id="desc" value="#{appt.comments}"/>
 
 						<p:commandButton type="reset" value="Reset" />
-						<p:commandButton id="addButton" value="Save" process="@this"
+						<p:commandButton id="addButton" value="Salvar"
 							action="#{appt.requestAppointment}"
 							oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 

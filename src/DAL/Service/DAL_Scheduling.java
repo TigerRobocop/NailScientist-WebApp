@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+
+import basicas.person.Employee;
 import basicas.service.Appointment;
 import DAL.DAL_Generic;
 
@@ -16,12 +18,13 @@ public class DAL_Scheduling extends DAL_Generic<Appointment>{
 		
 	
 	@SuppressWarnings("unchecked")
-	public List<Appointment> listUnconfirmed(){
+	public List<Appointment> listUnconfirmed(Employee emp){
 		List<Appointment> retorno = null;		
 		
 		try {
-			String query = "select sc from Appointment sc where sc.isConfirmed is false";
-			Query q = getEntityManager().createQuery(query, Appointment.class);		
+			String query = "select sc from Appointment sc where sc.isConfirmed is false and sc.employee.login = :emp";
+			Query q = getEntityManager().createQuery(query, Appointment.class);	
+			q.setParameter("emp", emp.getLogin());	
 			
 			retorno = q.getResultList();
 			

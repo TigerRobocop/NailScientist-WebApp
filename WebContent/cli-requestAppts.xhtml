@@ -28,7 +28,7 @@
 					showEffect="clip" hideEffect="clip">
 					<h:form id="reqest">
 						<p:outputLabel for="empl" value="Selecione o funcionário:" />
-						<p:selectOneMenu id="empl" value="#{appt.newAppt.emp.id}"
+						<p:selectOneMenu id="empl" value="#{appt.emp.id}"
 							style="width:150px" required="true">
 							<f:selectItem itemLabel="Escolha um" itemValue=""
 								noSelectionOption="true" />
@@ -36,8 +36,8 @@
 								itemLabel="#{emp.name}" itemValue="#{emp.id}" />
 						</p:selectOneMenu>
 						<br></br>
-						<p:outputLabel for="datetime" value="Datetime:" />
-						<p:calendar id="datetime" value="#{appt.newAppt.startAppointment}"
+						<p:outputLabel for="datetime" value="Horário:" />
+						<p:calendar id="datetime" value="#{appt.timeAppt}"
 							pattern="dd/MM/yyyy HH:mm:ss" />
 						<br></br>
 						<p:commandButton type="reset" value="Reset" />

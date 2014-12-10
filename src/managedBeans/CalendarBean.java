@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -32,6 +33,9 @@ public class CalendarBean implements Serializable {
 	List<Appointment> listAppts;
 	Appointment appt;
 	
+	@ManagedProperty("#{loginBeanEmp}")
+    private LoginBeanEmp login; // +setter (no getter!)
+	
 	@PostConstruct
 	public void init() {
 		eventModel = new DefaultScheduleModel();
@@ -44,14 +48,20 @@ public class CalendarBean implements Serializable {
 						.getEndAppointment(), sc));
 			}
 		}
+		
+		
+	}
 
+	public void setLogin(LoginBeanEmp login) {
+		this.login = login;
 	}
 
 	private List<Appointment> getAppointments() {
 		List<Appointment> retorno = null;
 		try {
 			Facade f = new Facade();
-			retorno = f.listUnconfirmed();
+			
+			retorno = f.listUnconfirmed(f.findEmployeeByLogin(login.getUsername()));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

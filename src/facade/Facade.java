@@ -201,9 +201,9 @@ public class Facade {
 		return bll.update(sc);
 	}
 	
-	public List<Appointment> listUnconfirmed() {
+	public List<Appointment> listUnconfirmed(Employee emp) {
 		DAL_Scheduling dao = DAL_Factory.getDAL_Scheduling();
-		return dao.listUnconfirmed();
+		return dao.listUnconfirmed(emp);
 	}
 
 }

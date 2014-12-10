@@ -27,50 +27,23 @@ public class AppointmentBean {
 
 	List<Employee> listEmployee;
 	Employee emp;
-	Appointment newAppt = new Appointment();
+	Appointment newAppt;
 	Date timeAppt;
+	String comments;
 	
 	
+
+	public AppointmentBean(){
+		this.newAppt = new Appointment();
+		this.emp = new Employee();
+	}
 	
 
 	@ManagedProperty("#{loginBeanCli}")
     private LoginBeanCli login; // +setter (no getter!)
 
-	private ScheduleModel eventModel;
-	private ScheduleEvent event = new DefaultScheduleEvent();
-/*
-	@PostConstruct
-	public void init() {
-		emp = new Employee();
-		eventModel = new DefaultScheduleModel();
 
-	}
-*/
 	
-
-	public void addEvent(ActionEvent actionEvent) {
-		if (event.getId() == null)
-			eventModel.addEvent(event);
-		else
-			eventModel.updateEvent(event);
-
-		event = new DefaultScheduleEvent();
-	}
-
-	public void onEventSelect(SelectEvent selectEvent) {
-		event = (ScheduleEvent) selectEvent.getObject();
-	}
-
-	public void onDateSelect(SelectEvent selectEvent) {
-		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(),
-				(Date) selectEvent.getObject());
-		newAppt.setStartAppointment((Date)selectEvent.getObject());
-	}
-	
-	 private void addMessage(FacesMessage message) {
-	        FacesContext.getCurrentInstance().addMessage(null, message);
-	    }
-
 	public String requestAppointment() {
 		try {
 			Facade f = new Facade();
@@ -86,6 +59,7 @@ public class AppointmentBean {
 			System.out.println(newAppt.getClient().getName());
 			
 			newAppt.setStartAppointment(timeAppt);
+			newAppt.setComments(comments);
 			
 
 			Calendar cal = Calendar.getInstance(); // creates calendar
@@ -103,9 +77,6 @@ public class AppointmentBean {
 
 		return "index";
 	}
-
-
-
 
 	public List<Employee> getAllEmployees() {
 		List<Employee> retorno = null;
@@ -127,22 +98,11 @@ public class AppointmentBean {
 
 	public void setListEmployee(List<Employee> listEmployee) {
 		this.listEmployee = listEmployee;
-	}
+	}	
 	
-	public ScheduleModel getEventModel() {
-		return eventModel;
-	}
-
-	public ScheduleEvent getEvent() {
-		return event;
-	}
-
-	public void setEvent(ScheduleEvent event) {
-		this.event = event;
-	}
 	
 	public Employee getEmp() {
-		return emp;
+		return emp = new Employee();
 	}
 
 	public void setEmp(Employee emp) {
@@ -169,4 +129,11 @@ public class AppointmentBean {
 		this.timeAppt = timeAppt;
 	}
 
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
 }
