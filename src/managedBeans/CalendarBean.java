@@ -47,8 +47,7 @@ public class CalendarBean implements Serializable {
 						.getName(), sc.getStartAppointment(), sc
 						.getEndAppointment(), sc));
 			}
-		}
-		
+		}		
 		
 	}
 
