@@ -7,9 +7,9 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<ui:composition template="/template-cli.xhtml">
-		<ui:define name="title">Solicitar Agendamentos	</ui:define>
+		<ui:define name="title">The NailScientist WebApp - Cliente</ui:define>
 		<ui:define name="content">
-			<p:panel header="Solicitar Agendamentos" id="panInicio"
+			<p:panel header="Editar Dados" id="panInicio"
 				style="text-align:center; width:600px">
 					<h:form id="signupForm" styleClass="input-form">
 			<h:panelGrid columns="2" border="0">
@@ -33,7 +33,7 @@
 						navigator="true" required="true" yearRange="c-100:c-0"
 						pattern="dd/MM/yyyy" showOn="button" />
 				</h:panelGrid>
-				<p:commandButton value="Cadastrar" action="#{loginBeanCli.updateUser}"
+				<br></br><p:commandButton value="Salvar Alterações" action="#{loginBeanCli.updateUser}"
 					style="display:block; margin:0 auto;" ajax="false" />
 
 			</h:panelGrid>

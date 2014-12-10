@@ -7,10 +7,11 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<ui:composition template="/template-emp.xhtml">
-		<ui:define name="title">Welcome - Employee	</ui:define>
+		<ui:define name="title">The NailScientist WebApp - Employee</ui:define>
 		<ui:define name="content">
 			<h:outputText
 				value="welcome page" />
+				<h3>Welcome #{loginBeanEmp.username}</h3>
 		</ui:define>
 	</ui:composition>
 </h:body>
