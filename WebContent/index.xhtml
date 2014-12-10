@@ -25,7 +25,7 @@
 				<p:inputText id="login" value="#{loginBeanCli.client.login}"
 					required="true" />
 				<h:outputLabel for="pass" value="Senha:" />
-				<p:inputText id="pass" value="#{loginBeanCli.client.password}"
+				<p:password id="pass" value="#{loginBeanCli.client.password}"
 					required="true" />
 
 				<p:commandButton value="Entrar" action="#{loginBeanCli.doLogin}" />
